@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tiara.order_service.model.Order;
 import com.tiara.order_service.service.OrderService;
+import com.tiara.order_service.vo.ResponseTemplate;
 
 @RestController
 @RequestMapping("/api/order")
@@ -41,5 +42,11 @@ public class OrderController {
     public ResponseEntity<?> deleteorder(@PathVariable Long id) {
         orderService.deleteorder(id);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/product/{id}")
+    public ResponseEntity<List<ResponseTemplate>> getOrderWithProductById(@PathVariable Long id) {
+        List<ResponseTemplate> responseTemplate = orderService.getOrderWithProdukById(id);
+        return responseTemplate != null ? ResponseEntity.ok(responseTemplate): ResponseEntity.notFound().build();
     }
 }

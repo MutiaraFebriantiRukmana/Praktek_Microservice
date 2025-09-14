@@ -2,9 +2,13 @@ package com.tiara.order_service.service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
 import com.tiara.order_service.model.Order;
 import com.tiara.order_service.repository.OrderRepository;
 import com.tiara.order_service.vo.Pelanggan;
@@ -12,12 +16,17 @@ import com.tiara.order_service.vo.Produk;
 import com.tiara.order_service.vo.ResponseTemplate;
 
 @Service
+
+
 public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
     @Autowired
     private RestTemplate restTemplate;
+
+    @Autowired
+    private DiscoveryClient discoveryClient;
 
     public List<Order> getAllorders(){
     return orderRepository.findAll();
@@ -34,8 +43,12 @@ public class OrderService {
     public List<ResponseTemplate> getOrderWithProdukById(Long id){
         List<ResponseTemplate> responseList = new ArrayList<>();
         Order order = getorderById(id);
-        Produk produk = restTemplate.getForObject("http://localhost:8081/api/prpduk"+ order.getProdukId(), Produk.class);
-        Pelanggan pelanggan = restTemplate.getForObject("http://localhost:8082/api/pelanggan" + order.getPelangganId(), Pelanggan.class);
+        ServiceInstance serviceInstance = discoveryClient.getInstances("product-service").get(0);
+        Produk produk = restTemplate.getForObject(serviceInstance.getUri() + "/api/produk/"
+                + order.getProdukId(), Produk.class);
+                serviceInstance = discoveryClient.getInstances("pelanggan-service").get(0);
+        Pelanggan pelanggan = restTemplate.getForObject(serviceInstance.getUri() + "/api/pelanggan/"
+                + order.getPelangganId(), Pelanggan.class);
         ResponseTemplate vo = new ResponseTemplate();
         vo.setOrder(order);
         vo.setProduk(produk);
