@@ -1,6 +1,9 @@
+server:
+  port: 8084
+
 spring:
   application:
-    name: peminjaman 
+    name: peminjaman-service
 
 eureka:
   client:

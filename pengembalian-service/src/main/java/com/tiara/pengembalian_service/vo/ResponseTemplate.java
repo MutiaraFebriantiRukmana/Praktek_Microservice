@@ -1,20 +1,23 @@
-package com.tiara.peminjaman_service.vo;
+package com.tiara.pengembalian_service.vo;
 
-import com.tiara.peminjaman_service.model.Peminjaman;
+
+import com.tiara.pengembalian_service.model.Pengembalian;
 
 public class ResponseTemplate {
 
     private Peminjaman peminjaman;
     private Anggota anggota;
     private Buku buku;
+    private Pengembalian pengembalian;
 
     public ResponseTemplate() {
     }
 
-    public ResponseTemplate(Peminjaman peminjaman, Anggota anggota, Buku buku) {
+    public ResponseTemplate(Peminjaman peminjaman, Anggota anggota, Buku buku, Pengembalian pengembalian) {
         this.peminjaman = peminjaman;
         this.anggota = anggota;
         this.buku = buku;
+        this.pengembalian = pengembalian;
     }
 
     // --- Getters ---
@@ -30,6 +33,11 @@ public class ResponseTemplate {
     public Buku getBuku() {
         return buku;
     }
+
+    public Pengembalian getPengembalian() {
+        return pengembalian;
+    }
+
     // --- Setters ---
 
     public void setPeminjaman(Peminjaman peminjaman) {
@@ -42,5 +50,9 @@ public class ResponseTemplate {
 
     public void setBuku(Buku buku) {
         this.buku = buku;
+    }
+
+    public void setPengembalian(Pengembalian pengembalian) {
+        this.pengembalian = pengembalian;
     }
 }

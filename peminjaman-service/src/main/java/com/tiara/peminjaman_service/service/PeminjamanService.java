@@ -44,39 +44,21 @@ public class PeminjamanService {
         }
     
       
-        List<ServiceInstance> anggotaInstances = discoveryClient.getInstances("anggota-service");
-        if (anggotaInstances.isEmpty()) {
-            throw new IllegalStateException("Service ANGGOTA tidak tersedia");
-        }
+        List<ServiceInstance> serviceInstances = discoveryClient.getInstances("API-GATEWAY1");
+        
         Anggota anggota = restTemplate.getForObject(
-                anggotaInstances.get(0).getUri() + "/api/anggota/" + peminjaman.getAnggotaId(),
+                serviceInstances.get(0).getUri() + "/api/anggota/" + peminjaman.getAnggotaId(),
                 Anggota.class);
     
-        
-        List<ServiceInstance> bukuInstances = discoveryClient.getInstances("buku-service");
-        if (bukuInstances.isEmpty()) {
-            throw new IllegalStateException("Service BUKU tidak tersedia");
-        }
         Buku buku = restTemplate.getForObject(
-                bukuInstances.get(0).getUri() + "/api/buku/" + peminjaman.getBukuId(),
+                serviceInstances.get(0).getUri() + "/api/buku/" + peminjaman.getBukuId(),
                 Buku.class);
-    
-        Pengembalian pengembalian = null;
-        if (peminjaman.getPengembalianId() != null) {
-            List<ServiceInstance> pengembalianInstances = discoveryClient.getInstances("pengembalian-service");
-            if (pengembalianInstances.isEmpty()) {
-                throw new IllegalStateException("Service PENGEMBALIAN tidak tersedia");
-            }
-            pengembalian = restTemplate.getForObject(
-                    pengembalianInstances.get(0).getUri() + "/api/pengembalian/" + peminjaman.getPengembalianId(),
-                    Pengembalian.class);
-        }
+
     
         ResponseTemplate response = new ResponseTemplate();
         response.setPeminjaman(peminjaman);
         response.setAnggota(anggota);
         response.setBuku(buku);
-        response.setPengembalian(pengembalian);
     
         return response;
     }

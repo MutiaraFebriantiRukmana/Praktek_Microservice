@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tiara.pengembalian_service.model.Pengembalian;
 import com.tiara.pengembalian_service.service.PengembalianService;
+import com.tiara.pengembalian_service.vo.ResponseTemplate;
 
 @RestController
 @RequestMapping("/api/pengembalian")
@@ -30,6 +31,12 @@ public class PengembalianController {
     public ResponseEntity<Pengembalian> getPengembalianById(@PathVariable Long id) {
         Pengembalian pengembalian = pengembalianService.getPengembalianById(id);
         return pengembalian != null ? ResponseEntity.ok(pengembalian) : ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/{id}/detail")
+    public List<ResponseTemplate> getPengembalianWithPeminjamanById(@PathVariable Long id){
+        List<ResponseTemplate> responseTemplates = pengembalianService.getPengembalianWithPeminjamanById(id);
+        return responseTemplates;
     }
 
     @PostMapping

@@ -12,6 +12,7 @@ public class Pengembalian {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Long peminjamanId;
     private String tanggal_dikembalikan;
     private String terlambat;
     private Double denda;
