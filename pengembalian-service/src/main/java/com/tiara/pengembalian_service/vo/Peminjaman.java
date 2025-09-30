@@ -1,19 +1,21 @@
 package com.tiara.pengembalian_service.vo;
 
+import java.time.LocalDate;
+
 public class Peminjaman {
     private Long id;
     private Long anggotaId;
     private Long bukuId;
-    private String tanggal_pinjam;
-    private String tanggal_kembali;
+    private LocalDate tanggalPeminjaman;
+    private LocalDate tanggalPengembalian;
     private Long pengembalianId;
-    public Peminjaman(Long id, Long anggotaId, Long bukuId, String tanggal_pinjam, String tanggal_kembali,
+    public Peminjaman(Long id, Long anggotaId, Long bukuId, LocalDate tanggalPeminjaman, LocalDate tanggalPengembalian,
             Long pengembalianId) {
         this.id = id;
         this.anggotaId = anggotaId;
         this.bukuId = bukuId;
-        this.tanggal_pinjam = tanggal_pinjam;
-        this.tanggal_kembali = tanggal_kembali;
+        this.tanggalPeminjaman = tanggalPeminjaman;
+        this.tanggalPengembalian = tanggalPengembalian;
         this.pengembalianId = pengembalianId;
     }
     public Long getId() {
@@ -34,17 +36,17 @@ public class Peminjaman {
     public void setBukuId(Long bukuId) {
         this.bukuId = bukuId;
     }
-    public String getTanggal_pinjam() {
-        return tanggal_pinjam;
+    public LocalDate getTanggalPeminjaman() {
+        return tanggalPeminjaman;
     }
-    public void setTanggal_pinjam(String tanggal_pinjam) {
-        this.tanggal_pinjam = tanggal_pinjam;
+    public void setTanggalPeminjaman(LocalDate tanggalPeminjaman) {
+        this.tanggalPeminjaman = tanggalPeminjaman;
     }
-    public String getTanggal_kembali() {
-        return tanggal_kembali;
+    public LocalDate getTanggalPengembalian() {
+        return tanggalPengembalian;
     }
-    public void setTanggal_kembali(String tanggal_kembali) {
-        this.tanggal_kembali = tanggal_kembali;
+    public void setTanggalPengembalian(LocalDate tanggalPengembalian) {
+        this.tanggalPengembalian = tanggalPengembalian;
     }
     public Long getPengembalianId() {
         return pengembalianId;
@@ -52,11 +54,8 @@ public class Peminjaman {
     public void setPengembalianId(Long pengembalianId) {
         this.pengembalianId = pengembalianId;
     }
-
-    @Override
-    public String toString() {
-        return super.toString();
-    }
+    
+    
 
     
 
