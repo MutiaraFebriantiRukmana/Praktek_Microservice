@@ -28,7 +28,7 @@ public class PeminjamanController {
         return peminjamanService.getAllPeminjamans();
     }
 
-  
+    
     @GetMapping("/{id}")
     public ResponseEntity<Peminjaman> getPeminjamanById(@PathVariable Long id) {
         Peminjaman peminjaman = peminjamanService.getPeminjamanById(id);
@@ -41,16 +41,12 @@ public class PeminjamanController {
     
 
     @GetMapping("/{id}/detail")
-    public ResponseEntity<ResponseTemplate> getPeminjamanWithDetailsById(@PathVariable Long id) {
-        ResponseTemplate response = peminjamanService.getPeminjamanWithDetailsById(id);
-        if (response != null) {
-            return ResponseEntity.ok(response);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<List<ResponseTemplate>> getPeminjamanWithDetailsById(@PathVariable Long id) {
+        List<ResponseTemplate> response = peminjamanService.getPeminjamanWithBookById(id);
+        return response != null ? ResponseEntity.ok(response): ResponseEntity.notFound().build();
     }
 
-    @PostMapping
+    @PostMapping // Modified to accept Peminjaman object directly
     public Peminjaman createPeminjaman(@RequestBody Peminjaman peminjaman) {
         return peminjamanService.createPeminjaman(peminjaman);
     }

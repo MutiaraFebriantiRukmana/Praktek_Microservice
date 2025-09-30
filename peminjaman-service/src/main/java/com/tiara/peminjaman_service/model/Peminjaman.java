@@ -6,19 +6,27 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDate; // Import for LocalDate
 
 
 @Data
 @Table(name = "peminjamans")
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+
 public class Peminjaman {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private long anggotaId;
-    private long bukuId;
-    private String tanggal_pinjam;
-    private String tanggal_kembali;
-    private Long pengembalianId;
+    //private Long pengembalianId;
+
+    private Long bukuId;
+    private LocalDate tanggalPeminjaman;
+    private LocalDate tanggalPengembalian;
     
 }
