@@ -3,13 +3,13 @@ package com.tiara.order_service.vo;
 import com.tiara.order_service.model.Order;
 
 public class ResponseTemplate {
-    Order order;
+    penggajian order;
     Produk produk;
     Pelanggan pelanggan;
 
     
 
-    public ResponseTemplate(Order order, Pelanggan pelanggan, Produk produk) {
+    public ResponseTemplate(penggajian order, Pelanggan pelanggan, Produk produk) {
         this.order = order;
         this.pelanggan = pelanggan;
         this.produk = produk;
@@ -18,11 +18,11 @@ public class ResponseTemplate {
     public ResponseTemplate() {
     }
 
-    public Order getOrder() {
+    public penggajian getOrder() {
         return order;
     }
 
-    public void setOrder(Order order) {
+    public void setOrder(penggajian order) {
         this.order = order;
     }
 
